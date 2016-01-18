@@ -140,6 +140,7 @@ mount /boot; \
 cp -a /tmp/boot/* /boot
 ```
 
+<!--
 ### opkgリポジトリの追加
 
 バージョンによって記載内容が異なるので注意。
@@ -173,6 +174,7 @@ vi /etc/opkg/mraa-upm.conf
     # src iotdk-i586 http://iotdk.intel.com/repos/2.0/iotdk/i586
     # src iotdk-x86 http://iotdk.intel.com/repos/2.0/iotdk/x86
 ```
+-->
 
 #### パッケージリストの更新
 
