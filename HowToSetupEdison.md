@@ -47,7 +47,7 @@ cat /etc/version
 
 ```
 shutdown -h now
-  
+
   # [  OK  ] Reached target Shutdown. を確認して、C-a k（CTRL+a+k）→ y
 ```
 
@@ -97,7 +97,7 @@ WI-FI設定ができれば、ネットワークからアクセスできる。
 また、SSHでのアクセスも出来るようになる。
 
 ```
-ssh root@edison00.local 
+ssh root@edison00.local
   # 既に他のサーバ用にssh configなどの設定がある場合は、-o PreferredAuthentications=password
 ```
 
@@ -177,8 +177,7 @@ vi /etc/opkg/mraa-upm.conf
 #### パッケージの更新
 
 ```
-opkg update; \
-opkg upgrade mraa upm nodejs nodejs-npm
+opkg update;
 ```
 
 ## 動作確認
@@ -186,7 +185,23 @@ opkg upgrade mraa upm nodejs nodejs-npm
 Edisonの電源を落とし、Grove Starter Kitのベースシールドをとりつける。
 
 
-## 開発環境の準備
+## 開発環境の準備（JavaSecipt）
+
+```
+opkg upgrade mraa upm nodejs nodejs-npm
+```
+
+[Sensors Bring IoT Projects to Life](https://software.intel.com/en-us/iot/hardware/sensors) から動かしたいサンプルのコードを確認し、実行。
+
+例として、[Grove Ear-clip Heart Rate Sensor](https://software.intel.com/en-us/iot/hardware/sensors/grove-ear-clip-heart-rate-sensor)の内容を sample1.js に書き込み、
+
+```
+node sample1.js
+```
+
+で動作を確認。
+
+[node.js版のAPI](http://iotdk.intel.com/docs/master/upm/node/) を参考にしながら、コードの変更などを試す。
 
 
 
