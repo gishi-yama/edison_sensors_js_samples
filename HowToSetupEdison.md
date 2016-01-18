@@ -201,7 +201,10 @@ node sample1.js
 
 で動作を確認。
 
-[node.js版のAPI](http://iotdk.intel.com/docs/master/upm/node/) を参考にしながら、コードの変更などを試す。
+- [node.js版のmraaのAPI](http://iotdk.intel.com/docs/master/mraa/node/)
+- [node.js版のupmのAPI](http://iotdk.intel.com/docs/master/upm/node/)
+
+などを参考にしながら、コードの変更などを試す。
 
 
 
