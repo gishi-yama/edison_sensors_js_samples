@@ -174,7 +174,7 @@ vi /etc/opkg/mraa-upm.conf
     # src iotdk-x86 http://iotdk.intel.com/repos/2.0/iotdk/x86
 ```
 
-#### パッケージの更新
+#### パッケージリストの更新
 
 ```
 opkg update;
