@@ -140,10 +140,10 @@ mount /boot; \
 cp -a /tmp/boot/* /boot
 ```
 
-<!--
+
 ### opkgリポジトリの追加
 
-バージョンによって記載内容が異なるので注意。
+バージョンによって記載内容が異なるので注意。また、全パッケージをupgradeするのではなく、必要なものだけupgrade/installする。
 
 #### Release 2.1 Yocto* complete image(edison-iotdk-image-280915)
 
@@ -156,30 +156,12 @@ vi /etc/opkg/base-feeds.conf
   src core2-32 http://iotdk.intel.com/repos/2.0/iotdk/core2-32
 ```
 
-#### edison-image-rel1-maint-rel1-ww42-14
-
-```
-cp /etc/opkg/base-feeds.conf /etc/opkg/base-feeds.conf.default; \
-vi /etc/opkg/base-feeds.conf
-  src/gz all        http://repo.opkg.net/edison/repo/all
-  src/gz edison     http://repo.opkg.net/edison/repo/edison
-  src/gz core2-32   http://repo.opkg.net/edison/repo/core2-32
-```
-
-```
-vi /etc/opkg/mraa-upm.conf
-  src mraa-upm http://iotdk.intel.com/repos/2.0/intelgalactic
-  # 必要に応じて追加
-    # src iotdk-all http://iotdk.intel.com/repos/2.0/iotdk/all
-    # src iotdk-i586 http://iotdk.intel.com/repos/2.0/iotdk/i586
-    # src iotdk-x86 http://iotdk.intel.com/repos/2.0/iotdk/x86
-```
--->
 
 #### パッケージリストの更新
 
 ```
-opkg update;
+opkg update
+opkg upgrade xdk-daemon
 ```
 
 ## 動作確認
