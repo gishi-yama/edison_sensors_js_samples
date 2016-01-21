@@ -128,6 +128,7 @@ echo "rm='rm -i'" >>.bash_profile; \
 source .bash_profile
 ```
 
+<!--
 ### /boot の拡張
 
 ```
@@ -139,7 +140,7 @@ mkfs.vfat /dev/mmcblk0p7; \
 mount /boot; \
 cp -a /tmp/boot/* /boot
 ```
-
+-->
 
 ### opkgリポジトリの追加
 
@@ -177,13 +178,13 @@ opkg upgrade mraa upm nodejs nodejs-npm
 
 [Sensors Bring IoT Projects to Life](https://software.intel.com/en-us/iot/hardware/sensors) から動かしたいサンプルのコードを確認し、実行。
 
-例として、[Grove Ear-clip Heart Rate Sensor](https://software.intel.com/en-us/iot/hardware/sensors/grove-ear-clip-heart-rate-sensor)の内容を sample1.js に書き込み、
+例として、[Grove Ear-clip Heart Rate Sensor](https://software.intel.com/en-us/iot/hardware/sensors/grove-ear-clip-heart-rate-sensor)のJavascript Samplesの内容を sample1.js に書き込み、D2にGrove Ear-clip Heart Rate Sensorを接続して、
 
 ```
 node sample1.js
 ```
 
-で動作を確認。
+で動作を確認。（コンソールに心拍数などが表示される。）
 
 - [node.js版のmraaのAPI](http://iotdk.intel.com/docs/master/mraa/node/)
 - [node.js版のupmのAPI](http://iotdk.intel.com/docs/master/upm/node/)
