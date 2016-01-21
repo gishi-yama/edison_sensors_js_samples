@@ -1,3 +1,5 @@
+### https://raw.github.com/github/gitignore/bfcae73085d01fa0cf2af868eaf51c0141ecbb9f/node.gitignore
+
 # Logs
 logs
 *.log
@@ -27,8 +29,65 @@ build/Release
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
 
-# Optional npm cache directory
-.npm
 
-# Optional REPL history
-.node_repl_history
+### https://raw.github.com/github/gitignore/bfcae73085d01fa0cf2af868eaf51c0141ecbb9f/Global/osx.gitignore
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
+### https://raw.github.com/github/gitignore/bfcae73085d01fa0cf2af868eaf51c0141ecbb9f/Global/windows.gitignore
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+
+### https://raw.github.com/github/gitignore/bfcae73085d01fa0cf2af868eaf51c0141ecbb9f/Global/linux.gitignore
+
+*~
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+
