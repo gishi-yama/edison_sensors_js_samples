@@ -138,7 +138,7 @@ cp -a /tmp/boot/* /boot
 
 バージョンによって記載内容が異なるので注意。また、全パッケージをupgradeするのではなく、必要なものだけupgrade/installする。
 
-#### Release 3.0 Yocto* complete image
+#### Release 3.0 Yocto* complete image(iot-devkit-prof-dev-image-edison-20160315)
 
 ```
 cp /etc/opkg/base-feeds.conf /etc/opkg/base-feeds.conf.default; \
