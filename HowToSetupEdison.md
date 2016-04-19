@@ -2,17 +2,9 @@
 
 https://software.intel.com/en-us/iot/hardware/edison/downloads
 
-から、Installerをダウンロードしてインストール。
+から、Installer をダウンロードしてインストール。
 
-もしくは
-
-- [FTDI USB Drive](http://www.ftdichip.com/Drivers/VCP.htm)
-- [xdk](https://software.intel.com/en-us/html5/xdk-iot)
-- [Flash Tool Lite](https://software.intel.com/en-us/iot/hardware/edison/downloads)
-
-をインストール。
-
-
+なお、Windowsの場合はイメージのアップデートで失敗することがあった。そのため、`Updateing Image` は解除してインストールとは別に行った方が良い。また、インストール自体に失敗する場合は、Driver softwareとFlash Tool Liteのみ個別にインストールしてもよい。
 
 ## Intel Edison の組み立て
 
@@ -61,7 +53,7 @@ screenのkillは、簡単に言えばディスプレイを抜くイメージ。E
 
 J3からUSBケーブルを取り外す。このとき、Edisonの**電源が必ず落ちている**必要がある。screenから`shutdown`するか、SW1UI2スイッチを長押しして電源を落とす。
 
-https://software.intel.com/en-us/iot/hardware/edison/downloads から、Release 2.1 Yocto* complete image(edison-iotdk-image-280915) をダウンロード・解凍する。
+https://software.intel.com/en-us/iot/hardware/edison/downloads から、Release X.X Yocto* complete image をダウンロード・解凍する。
 
 Flash Tool Liteを起動して、FlashEdison.json を読み込む。
 
@@ -145,6 +137,17 @@ cp -a /tmp/boot/* /boot
 ### opkgリポジトリの追加
 
 バージョンによって記載内容が異なるので注意。また、全パッケージをupgradeするのではなく、必要なものだけupgrade/installする。
+
+#### Release 3.0 Yocto* complete image(edison-iotdk-image-280915)
+
+```
+cp /etc/opkg/base-feeds.conf /etc/opkg/base-feeds.conf.default; \
+vi /etc/opkg/base-feeds.conf
+  src all      http://iotdk.intel.com/repos/3.0/iotdk/all
+  src x86      http://iotdk.intel.com/repos/3.0/iotdk/x86
+  src i586     http://iotdk.intel.com/repos/3.0/iotdk/i586
+  src core2-32 http://iotdk.intel.com/repos/3.0/iotdk/core2-32
+```
 
 #### Release 2.1 Yocto* complete image(edison-iotdk-image-280915)
 
