@@ -1,8 +1,8 @@
 // 心拍センサーとLCDの利用例
 
 // 心拍センサーモジュールを用意し、D2ピンの心拍センサーをehr2という名前で操作できるようにする
-var groveehr = require('jsupm_groveehr');
-var ehr2 = new groveehr.GroveEHR(2);
+var ehrModule = require('jsupm_groveehr');
+var ehr2 = new ehrModule.GroveEHR(2);
 
 // LCDモジュールを用意し、I2CピンのLCDをlcdという名前で操作できるようにする
 var i2clcd = require('jsupm_i2clcd');
@@ -36,7 +36,7 @@ function writeToLCD(str) {
 process.on('SIGINT', function () {
   clearInterval(myInterval);
   ehr2.stopBeatCounter();
-  groveehr.cleanUp();
+  ehrModule.cleanUp();
   lcd.setColor(0, 0, 0);
   lcd.clear();
   i2clcd.cleanUp();

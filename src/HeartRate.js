@@ -1,8 +1,8 @@
 // 心拍センサーの利用例
 
 // 心拍センサーモジュールを用意し、D2ピンの心拍センサーをeehr2という名前で操作できるようにする
-var groveehr = require('jsupm_groveehr');
-var ehr2 = new groveehr.GroveEHR(2);
+var ehrModule = require('jsupm_groveehr');
+var ehr2 = new ehrModule.GroveEHR(2);
 
 // 心拍センサーの動作を開始する
 ehr2.clearBeatCounter();
@@ -22,7 +22,7 @@ var myInterval = setInterval(function () {
 process.on('SIGINT', function () {
   clearInterval(myInterval);
   ehr2.stopBeatCounter();
-  groveehr.cleanUp();
+  ehrModule.cleanUp();
   console.log("心拍センサーの動作を終了しました");
   process.exit(0);
 });
