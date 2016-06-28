@@ -1,52 +1,45 @@
-// Load heart rate sensor module
+// 心拍センサーとLCDの利用例
+
+// 心拍センサーモジュールを用意し、D2ピンの心拍センサーをehr2という名前で操作できるようにする
 var groveehr = require('jsupm_groveehr');
-// Instantiate a Grove Ear-clip Heart Rate sensor on digital pin D2
 var ehr2 = new groveehr.GroveEHR(2);
 
+// LCDモジュールを用意し、I2CピンのLCDをlcdという名前で操作できるようにする
 var i2clcd = require('jsupm_i2clcd');
 var lcd = new i2clcd.Jhd1313m1(6, 0x3E, 0x62);
 lcd.setColor(0, 255, 0);
 lcd.clear();
 
-// set the beat counter to 0, init the clock and start counting beats
+// 心拍センサーの動作を開始する
 ehr2.clearBeatCounter();
 ehr2.initClock();
 ehr2.startBeatCounter();
+console.log("心拍センサーの動作を開始しました");
 
-var millis, beats, heartRate;
+// 1000ミリ秒（つまり、1秒）ごとに心拍センサーから生体情報を収集し、LCDに表示する
 var myInterval = setInterval(function () {
-  // we grab these just for display purposes in this example
-  millis = ehr2.getMillis();
-  beats = ehr2.beatCounter();
-
-  // heartRate() requires that at least 5 seconds pass before
-  // returning anything other than 0
-  heartRate = ehr2.heartRate();
-
-  // output milliseconds passed, beat count, and computed heart rate
-  console.log("Millis: " + millis + " Beats: " + beats +
-    " Heart Rate: " + heartRate);
-
-  writeToLCD("Heart Rate: " + heartRate);
+  var millis = ehr2.getMillis();
+  var beats = ehr2.beatCounter();
+  var hr = ehr2.heartRate();
+  console.log("収集時間[ms]: " + millis + " 心拍回数: " + beats + " 心拍数: " + hr);
+  writeToLCD("Heart Rate: " + hr);
 }, 1000);
 
-// Print message when exiting
-process.on('SIGINT', function () {
-  clearInterval(myInterval);
-  ehr2.stopBeatCounter();
-  ehr2 = null
-  groveehr.cleanUp();
-  groveehr = null;
-  lcd.setColor(0, 0, 0);
-  lcd.clear();
-  lcd = null;
-  i2clcd.cleanUp();
-  i2clcd = null;
-  process.exit(0);
-});
-
+// str の内容をLCDに表示する
 function writeToLCD(str) {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.write(str);
 }
+
+// 終了時にセンサーとLCDを停止する
+process.on('SIGINT', function () {
+  clearInterval(myInterval);
+  ehr2.stopBeatCounter();
+  groveehr.cleanUp();
+  lcd.setColor(0, 0, 0);
+  lcd.clear();
+  i2clcd.cleanUp();
+  console.log("心拍センサーの動作を終了しました");
+  process.exit(0);
+});
