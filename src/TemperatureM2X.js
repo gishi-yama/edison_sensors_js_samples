@@ -1,6 +1,9 @@
+// 実行前に一度、m2xモジュールをインストールしておくこと
+//   npm install -g m2x`
+
 // M2Xの接続に必要な情報
-// 起動時のコマンドを以下のようにしてください。
-// apiKey=... deviceId=... streamId=... node M2X.js
+// 実行時のコマンドを以下のようにしてください。
+//   apiKey=... deviceId=... streamId=... node M2X.js
 // ...の部分はM2Xの管理画面に載っています。
 var apiKey = process.env.apiKey;
 var deviceId = process.env.deviceId;
