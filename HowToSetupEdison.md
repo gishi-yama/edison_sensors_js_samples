@@ -1,11 +1,3 @@
-## 環境整備
-
-https://software.intel.com/en-us/iot/hardware/edison/downloads
-
-から、Installer をダウンロードしてインストール。
-
-なお、Windowsの場合はイメージのアップデートで失敗することがあった。そのため、`Updateing Image` は解除してインストールとは別に行った方が良い。また、インストール自体に失敗する場合は、Driver softwareとFlash Tool Liteのみ個別にインストールしてもよい。
-
 ## Intel Edison の組み立て
 
 組み立てる。EdisonとArdinoボードの接触に注意。
@@ -47,8 +39,61 @@ shutdown -h now
 
 screenのkillは、簡単に言えばディスプレイを抜くイメージ。Edisonを終了するときは必ず`shutdown`コマンドを叩くか、ログアウトしておく場合はexitコマンドなどを実行してからscreenをkillする。
 
+
 ## OS,ファームウェアのアップデート
 
+https://software.intel.com/en-us/iot/hardware/edison/downloads
+
+から、Installers をダウンロードして起動する。
+
+1. Next
+1. I accept... にチェックをいれて Next
+1. Next
+1. Setup Options になったら、上から順に実行していく。
+
+![EdisonSetup01](https://raw.githubusercontent.com/gishi-yama/edison_sensors_js_samples/master/img/EdisonSetup01.png)
+
+### Flash Firmware
+
+OSとファームウェアの書き換えを行う。
+
+Download the latest... で、OSイメージの保存先を選ぶ。選んだら Next を押す。
+
+![EdisonSetup02](https://raw.githubusercontent.com/gishi-yama/edison_sensors_js_samples/master/img/EdisonSetup02.png)
+
+イメージのダウンロードが完了すると、USBを接続せよ、と言われるので、画面指示の通り接続する（最低、①②が行われればよい）
+
+イメージが書き込まれた旨、ダイアログが表示されるので、 OK を押す。
+
+### Enable Security
+
+ssh でログインするための設定を行う。
+
+`Type a device name` 欄にデバイス名を入力し、Set name を押す。（例:edisonXX）
+
+名前を変更した旨、ダイアログが表示されるので、 OK を押す。
+
+`Type a password`, 'Re-type a password' 欄にパスワードを入力し、 Set password を押す。
+
+パスワードを変更した旨、ダイアログが表示されるので、 OK を押す
+
+### Connect WiFi
+
+Wi-Fiで接続するための設定を行う。
+
+接続できるWi-Fiのアクセスポイントが表示されるので、PCと同じアクセスポイントを選択して、パスワード等を入力し、 Configure WiFi を押す。
+
+Wi-Fiに接続できた旨、ダイアログが表示されるので、OK を押す。
+
+全て終了すると、Set up Optionsの画面に戻るので、 Finish を押す。
+
+PCから、EdisonがUSBメモリとして接続されているので、解除する。
+
+<!--
+なお、Windowsの場合はイメージのアップデートで失敗することがあった。そのため、`Updateing Image` は解除してインストールとは別に行った方が良い。また、インストール自体に失敗する場合は、Driver softwareとFlash Tool Liteのみ個別にインストールしてもよい。
+-->
+
+<!--
 ### Flash Tool Lite を使う方法
 
 J3からUSBケーブルを取り外す。このとき、Edisonの**電源が必ず落ちている**必要がある。screenから`shutdown`するか、SW1UI2スイッチを長押しして電源を落とす。
@@ -75,6 +120,8 @@ reboot ota
 
 ただし、Release 2.1 Yocto* complete imageはファイル容量がEdisonのリムーバブルディスク領域より大きいのでこの手段は使えない。Release 2.0 Yocto* complete image(edison-image-ww25.5-15.zip)以下であれば実行できる。
 
+
+
 ## 初期設定
 
 ```
@@ -83,15 +130,19 @@ configure_edison --setup
 
 パスワード、ユニーク名、WI-FI設定が行える。ここから先は**edison00**という名前で、WI-FI設定をしていることを前提とする。
 
-WI-FI設定ができれば、ネットワークからアクセスできる。
-ブラウザで http://edison00.local/ にアクセスして、情報が出ればOK。
 
-また、SSHでのアクセスも出来るようになる。
+WI-FI設定ができれば、ネットワークからアクセスできる。
+ブラウザで http://edisonXX.local/ にアクセスして、情報が出ればOK。
+-->
+
+Wi-Fi設定ができれば、SSHでのアクセスも出来るようになる。
 
 ```
-ssh root@edison00.local
+ssh root@edisonXX.local
   # 既に他のサーバ用にssh configなどの設定がある場合は、-o PreferredAuthentications=password
 ```
+
+※接続出来ないときはscreenで接続して、ipアドレスを調べる。
 
 ## 必要な下回りの準備（開発用）
 
@@ -134,6 +185,7 @@ cp -a /tmp/boot/* /boot
 ```
 -->
 
+<!--
 ### opkgリポジトリの追加
 
 バージョンによって記載内容が異なるので注意。また、全パッケージをupgradeするのではなく、必要なものだけupgrade/installする。
@@ -160,24 +212,30 @@ vi /etc/opkg/base-feeds.conf
   src core2-32 http://iotdk.intel.com/repos/2.0/iotdk/core2-32
 ```
 
-
 #### パッケージリストの更新
 
 ```
 opkg update
-opkg upgrade xdk-daemon
 ```
+-->
 
 ## 動作確認
 
 Edisonの電源を落とし、Grove Starter Kitのベースシールドをとりつける。
 
 
-## 開発環境の準備（JavaSecipt）
+## 開発環境の準備（JavaScript）
 
+<!--
 ```
 opkg upgrade mraa upm nodejs nodejs-npm
 ```
+
+```
+npm update -g mraa upm iotkit-agent iotkit-client
+```
+-->
+
 
 [Sensors Bring IoT Projects to Life](https://software.intel.com/en-us/iot/hardware/sensors) から動かしたいサンプルのコードを確認し、実行。
 
